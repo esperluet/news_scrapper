@@ -1,6 +1,6 @@
 <?php
 
-namespace App\News\PullData\Exception;
+namespace App\Domain\News\PullData\Exception;
 
 class PullDataException extends \Exception
 {

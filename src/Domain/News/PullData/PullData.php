@@ -1,6 +1,6 @@
 <?php
 
-namespace App\News\PullData;
+namespace App\Domain\News\PullData;
 
 use App\News\PullData\NewsFetcherInterface;
 use App\News\PullData\NewsEnricherInterface;
