@@ -2,10 +2,10 @@
 
 namespace App\Domain\News\PullData;
 
-use App\News\PullData\NewsFetcherInterface;
-use App\News\PullData\NewsEnricherInterface;
-use App\News\PullData\Collection\NewsCollectionInterface;
-use App\News\PullData\PullDataRequest;
+use App\Domain\News\Collection\NewsCollectionInterface;
+use App\Domain\News\PullData\NewsEnricherInterface;
+use App\Domain\News\PullData\NewsFetcherInterface;
+use App\Domain\News\PullData\PullDataRequest;
 
 class PullData
 {
@@ -20,11 +20,11 @@ class PullData
     {
         $this->checkRequest($request);
 
-        $externalNews = $this->fetcher->get($request->keyword, $request->date);
+        $articles = $this->fetcher->get($request->keyword, $request->date);
         
-        $newsCollection = $this->enricher->enrich($externalNews);
+        $enrichedArticles = $this->enricher->enrich($articles);
         
-        $this->newsCollection->bulkSave($newsCollection);
+        $this->newsCollection->bulkSave($enrichedArticles);
 
         return true;
     }

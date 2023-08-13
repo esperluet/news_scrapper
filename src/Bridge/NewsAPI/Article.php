@@ -4,21 +4,21 @@ namespace App\Bridge\NewsAPI;
 
 class Article
 {
-    private mixed $source;
+    public mixed $source;
 
-    private string $author;
+    public string $author;
 
-    private string $title;
+    public string $title;
 
-    private string $description;
+    public string $description;
 
-    private string $url;
+    public string $url;
 
-    private string $urlToImage;
+    public string $urlToImage;
 
-    private \DateTimeInterface $publishedAt;
+    public \DateTimeInterface $publishedAt;
 
-    private string $content;
+    public string $content;
 
     public function __construct(array $data)
     {

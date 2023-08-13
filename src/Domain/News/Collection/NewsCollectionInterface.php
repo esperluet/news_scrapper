@@ -2,13 +2,16 @@
 
 namespace App\Domain\News\Collection;
 
-use App\News\Model\News;
+use App\Domain\News\Model\Article;
 
 interface NewsCollectionInterface
 {
-    public function get(string $newsId): News;
+    public function get(string $newsId): Article;
 
-    public function save(News $news);
+    public function save(Article $article);
 
-    public function bulkSave(iterable $newsList);
+    /**
+     * @var Article[] $articles
+     */
+    public function bulkSave(iterable $articles);
 }

@@ -4,5 +4,5 @@ namespace App\Domain\News\PullData;
 
 interface NewsFetcherInterface
 {
-    public function get(string $keyword, \DateTimeInterface $date) : iterable;
+    public function get(string $keyword, \DateTimeInterface $date) : array;
 }

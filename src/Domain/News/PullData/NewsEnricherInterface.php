@@ -2,7 +2,14 @@
 
 namespace App\Domain\News\PullData;
 
+use App\Domain\News\Model\Article;
+
 interface NewsEnricherInterface
 {
-    public function enrich(iterable $news) : iterable;
+    /**
+     * @var Article[] $articles
+     * 
+     * @return Aritcle[]
+     */
+    public function enrich(array $articles) : array;
 }
