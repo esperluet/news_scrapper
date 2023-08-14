@@ -6,7 +6,7 @@ class Article
 {
     public mixed $source;
 
-    public string $author;
+    public ?string $author;
 
     public string $title;
 
@@ -14,21 +14,10 @@ class Article
 
     public string $url;
 
-    public string $urlToImage;
+    public ?string $urlToImage;
 
     public \DateTimeInterface $publishedAt;
 
     public string $content;
-
-    public function __construct(array $data)
-    {
-        $attributes = get_object_vars($this);
-
-        foreach($data as $key => $value) {
-            if(in_array($key, $attributes)) {
-                $this->$key = $value;
-            }
-        }
-    }
 
 }

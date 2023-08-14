@@ -138,8 +138,18 @@ class NewsAPIBridge
     {
         if('ok' === $content['status']) {
             $articles = [];
-            foreach($content as $article) {
-                $articles[] = new Article($article);
+            foreach($content['articles'] as $newsApiArticle) {
+                $article  = new Article();
+                $article->title = $newsApiArticle['title'];
+                $article->source = $newsApiArticle['source'];
+                $article->author = $newsApiArticle['author'];
+                $article->description = $newsApiArticle['description'];
+                $article->url = $newsApiArticle['url'];
+                $article->urlToImage = $newsApiArticle['urlToImage'];
+                $article->content = $newsApiArticle['content'];
+                $article->publishedAt = new \DateTimeImmutable($newsApiArticle['publishedAt']);
+                
+                $articles[] = $article;
             }
             return $articles;
         }

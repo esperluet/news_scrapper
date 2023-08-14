@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\News\PullData;
+namespace App\Domain\News\PullNews;
 
 use App\Domain\News\Model\Article;
 

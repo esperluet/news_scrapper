@@ -4,7 +4,7 @@ namespace App\Scrapper\NewsAPI;
 
 use App\Bridge\NewsAPI\NewsAPIBridge;
 use App\Bridge\NewsAPI\Request\EverythingRequest;
-use App\Domain\News\PullData\NewsFetcherInterface;
+use App\Domain\News\PullNews\NewsFetcherInterface;
 use App\Bridge\NewsAPI\Article as ExternalArticle;
 use App\Domain\News\Model\Article;
 
@@ -19,16 +19,24 @@ class Fetcher implements NewsFetcherInterface
      * 
      * @return Article[]
      */
-    public function get(string $keyword, \DateTimeInterface $date) : array
+    public function get(string $keyword, \DateTimeInterface $date) : ?array
     {
-        $request = new EverythingRequest(['query' => $keyword, 'from' => (string)$date]);
+        $request = new EverythingRequest(['q' => $keyword, 'from' => $date]);
 
         /**
          * @var ExternalArticle[] $externalsArticles 
          */
         $externalsArticles = $this->newsApi->getEverything($request);
 
-        return array_map('newsApiArticleToArticle', $externalsArticles);
+        if(!empty($externalsArticles)) {
+            $articles = [];
+            foreach($externalsArticles as $externalsArticle) {
+                $articles[] = $this->newsApiArticleToArticle($externalsArticle);
+            }
+            return $articles;
+        }
+        
+        return null;
     }
 
     private function newsApiArticleToArticle(ExternalArticle $externalsArticle): Article

@@ -4,7 +4,7 @@ namespace App\Bridge\NewsAPI\Request;
 
 final class EverythingRequest extends AbstractRequest
 {
-    public ?string $query = null;
+    public ?string $q = null;
     
     public ?string $searchIn = null;
     

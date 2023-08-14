@@ -8,7 +8,7 @@ class Article
 
     private string $title;
 
-    private string $author;
+    private ?string $author;
 
     private string $description;
 
@@ -111,7 +111,7 @@ class Article
         return $this->createAt;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?string $author): self
     {
         $this->author = $author;
 
