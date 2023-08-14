@@ -71,7 +71,7 @@ class PullNewsCommand extends Command
             $output->writeln([
                 'Something went wrong!',
             ]);
-            $this->logger->error('Unable to pull news ', ['exception' => $e]);
+            $this->logger->error('Unable to pull news', ['exception' => $e, 'message' => $e->getMessage(), 'trace' => $e->getTrace()]);
             return Command::FAILURE;
         }
         

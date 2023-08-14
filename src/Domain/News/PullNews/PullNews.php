@@ -2,7 +2,7 @@
 
 namespace App\Domain\News\PullNews;
 
-use App\Domain\News\Collection\NewsCollectionInterface;
+use App\Domain\News\Collection\ArticleCollectionInterface;
 use App\Domain\News\PullNews\NewsEnricherInterface;
 use App\Domain\News\PullNews\NewsFetcherInterface;
 use App\Domain\News\PullNews\PullNewsRequest;
@@ -12,7 +12,7 @@ class PullNews
     public function __construct(
         private NewsFetcherInterface $fetcher,
         private NewsEnricherInterface $enricher,
-        //private NewsCollectionInterface $newsCollection
+        private ArticleCollectionInterface $articleCollection
     ) {        
     }
 
@@ -24,7 +24,7 @@ class PullNews
         
         if(!empty($articles)) {
             $enrichedArticles = $this->enricher->enrich($articles);
-            //$this->newsCollection->bulkSave($enrichedArticles);
+            $this->articleCollection->bulkSave($enrichedArticles);
             return true;
         }
 

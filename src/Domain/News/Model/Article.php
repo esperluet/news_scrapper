@@ -2,22 +2,37 @@
 
 namespace App\Domain\News\Model;
 
+use App\Repository\ArticleRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Ramsey\Uuid\Uuid;
+
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
+    #[ORM\Id]
+    #[ORM\Column]
     private string $articleId;
 
+    #[ORM\Column(length: 255)]
     private string $title;
 
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $author;
 
+    #[ORM\Column(type: Types::TEXT)]
     private string $description;
 
+    #[ORM\Column(length: 255)]
     private string $url;
 
-    private string $imageUrl;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl;
 
+    #[ORM\Column(type: Types::TEXT)]
     private string $content;
 
+    #[ORM\Column(type: Types::SIMPLE_ARRAY)]
     private array $tags = [];
 
     private \DateTimeInterface $publishedAt;
@@ -27,6 +42,7 @@ class Article
     public function __construct()
     {
         $this->createAt = new \DateTimeImmutable();
+        $this->articleId = Uuid::uuid4();
     }
 
     public function getArticleId(): string
@@ -70,14 +86,14 @@ class Article
         return $this->url;
     }
 
-    public function setImageUrl(string $imageUrl): self
+    public function setImageUrl(?string $imageUrl): self
     {
         $this->imageUrl = $imageUrl;
         
         return $this;
     }
 
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }
@@ -118,7 +134,7 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): string
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
@@ -133,6 +149,13 @@ class Article
     public function getTags(): array
     {
         return $this->tags;
+    }
+
+    public function setTags(array $tags): static
+    {
+        $this->tags = $tags;
+
+        return $this;
     }
 
 }

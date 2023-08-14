@@ -4,9 +4,9 @@ namespace App\Domain\News\Collection;
 
 use App\Domain\News\Model\Article;
 
-interface NewsCollectionInterface
+interface ArticleCollectionInterface
 {
-    public function get(string $newsId): Article;
+    public function get(string $articleId): ?Article;
 
     public function save(Article $article);
 
