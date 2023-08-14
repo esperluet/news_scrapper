@@ -14,8 +14,9 @@ Before you begin, make sure you have the following software installed:
 - PHP 8.1 or higher
 - Composer (https://getcomposer.org/)
 - Using SQlite
+```
 
-### Installing
+## Installing
 
 1. Clone the repository:
 
