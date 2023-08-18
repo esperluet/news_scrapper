@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository;
+namespace Esperluet\Repository;
 
-use App\Domain\News\Model\Article;
-use App\Domain\News\Collection\ArticleCollectionInterface;
+use Esperluet\Domain\News\Model\Article;
+use Esperluet\Domain\News\Collection\ArticleCollectionInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

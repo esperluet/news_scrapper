@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\News\PullNews;
+namespace Esperluet\Domain\News\PullNews;
 
-use App\Domain\News\Model\Article;
+use Esperluet\Domain\News\Model\Article;
 
 interface NewsEnricherInterface
 {

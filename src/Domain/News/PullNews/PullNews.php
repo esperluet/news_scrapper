@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\News\PullNews;
+namespace Esperluet\Domain\News\PullNews;
 
-use App\Domain\News\Collection\ArticleCollectionInterface;
-use App\Domain\News\PullNews\NewsEnricherInterface;
-use App\Domain\News\PullNews\NewsFetcherInterface;
-use App\Domain\News\PullNews\PullNewsRequest;
+use Esperluet\Domain\News\Collection\ArticleCollectionInterface;
+use Esperluet\Domain\News\PullNews\NewsEnricherInterface;
+use Esperluet\Domain\News\PullNews\NewsFetcherInterface;
+use Esperluet\Domain\News\PullNews\PullNewsRequest;
 
 class PullNews
 {

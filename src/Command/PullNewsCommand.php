@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Command;
+namespace Esperluet\Command;
 
-use App\Domain\News\PullNews\PullNews;
-use App\Domain\News\PullNews\PullNewsRequest;
+use Esperluet\Domain\News\PullNews\PullNews;
+use Esperluet\Domain\News\PullNews\PullNewsRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

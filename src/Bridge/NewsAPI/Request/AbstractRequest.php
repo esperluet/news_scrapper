@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bridge\NewsAPI\Request;
+namespace Esperluet\Bridge\NewsAPI\Request;
 
 abstract class AbstractRequest
 {

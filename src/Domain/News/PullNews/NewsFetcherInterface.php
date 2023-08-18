@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\News\PullNews;
+namespace Esperluet\Domain\News\PullNews;
 
 interface NewsFetcherInterface
 {

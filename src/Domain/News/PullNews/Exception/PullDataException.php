@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\News\PullNews\Exception;
+namespace Esperluet\Domain\News\PullNews\Exception;
 
 class PullNewsException extends \Exception
 {

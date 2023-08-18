@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Enricher\Custom;
+namespace Esperluet\Enricher\Custom;
 
-use App\Domain\News\PullNews\NewsEnricherInterface;
-use App\Domain\News\Model\Article;
+use Esperluet\Domain\News\PullNews\NewsEnricherInterface;
+use Esperluet\Domain\News\Model\Article;
 
 class ManualEnricher implements NewsEnricherInterface
 {

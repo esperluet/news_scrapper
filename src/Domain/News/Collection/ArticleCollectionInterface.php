@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\News\Collection;
+namespace Esperluet\Domain\News\Collection;
 
-use App\Domain\News\Model\Article;
+use Esperluet\Domain\News\Model\Article;
 
 interface ArticleCollectionInterface
 {

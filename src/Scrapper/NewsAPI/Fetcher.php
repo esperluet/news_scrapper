@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Scrapper\NewsAPI;
+namespace Esperluet\Scrapper\NewsAPI;
 
-use App\Bridge\NewsAPI\NewsAPIBridge;
-use App\Bridge\NewsAPI\Request\EverythingRequest;
-use App\Domain\News\PullNews\NewsFetcherInterface;
-use App\Bridge\NewsAPI\Article as ExternalArticle;
-use App\Domain\News\Model\Article;
+use Esperluet\Bridge\NewsAPI\NewsAPIBridge;
+use Esperluet\Bridge\NewsAPI\Request\EverythingRequest;
+use Esperluet\Domain\News\PullNews\NewsFetcherInterface;
+use Esperluet\Bridge\NewsAPI\Article as ExternalArticle;
+use Esperluet\Domain\News\Model\Article;
 
 class Fetcher implements NewsFetcherInterface
 {

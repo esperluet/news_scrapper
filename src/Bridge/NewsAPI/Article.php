@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bridge\NewsAPI;
+namespace Esperluet\Bridge\NewsAPI;
 
 class Article
 {

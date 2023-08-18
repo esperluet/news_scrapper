@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Bridge\NewsAPI;
+namespace Esperluet\Bridge\NewsAPI;
 
-use App\Bridge\NewsAPI\Request\{AbstractRequest, EverythingRequest, SourcesRequest, TopHeadLinesRequest};
+use Esperluet\Bridge\NewsAPI\Request\{AbstractRequest, EverythingRequest, SourcesRequest, TopHeadLinesRequest};
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class NewsAPIBridge

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\News\Model;
+namespace Esperluet\Domain\News\Model;
 
-use App\Repository\ArticleRepository;
+use Esperluet\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Ramsey\Uuid\Uuid;
