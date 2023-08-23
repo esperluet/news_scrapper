@@ -9,7 +9,7 @@ interface NewsEnricherInterface
     /**
      * @var Article[] $articles
      * 
-     * @return Aritcle[]
+     * @return Article[]
      */
-    public function enrich(array $articles) : array;
+    public function enrich(array $articles): array;
 }

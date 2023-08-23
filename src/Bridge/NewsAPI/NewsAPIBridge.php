@@ -8,11 +8,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class NewsAPIBridge
 {
     private const COUNTRY_OPTIONS = [
-        'ae', 'ar', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 
-        'co', 'cz', 'de', 'eg', 'fr', 'gb', 'gr', 'hk', 'hu', 
-        'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt', 'lv', 
-        'ma', 'mx', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 
-        'ro', 'ro', 'rs', 'ru', 'sa', 'se', 'sg', 'si', 'sk', 
+        'ae', 'ar', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn',
+        'co', 'cz', 'de', 'eg', 'fr', 'gb', 'gr', 'hk', 'hu',
+        'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt', 'lv',
+        'ma', 'mx', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt',
+        'ro', 'ro', 'rs', 'ru', 'sa', 'se', 'sg', 'si', 'sk',
         'th', 'tr', 'tw', 'ua', 'us', 've', 'za',
     ];
 
@@ -21,8 +21,8 @@ class NewsAPIBridge
         'entertainment',
         'general',
         'health',
-        'science',  
-        'sports',  
+        'science',
+        'sports',
         'technology'
     ];
 
@@ -48,7 +48,7 @@ class NewsAPIBridge
         private string $apiBaseUri,
         private string $apiVersion,
         private HttpClientInterface $httpClient
-    ) {        
+    ) {
     }
 
     /**
@@ -69,10 +69,10 @@ class NewsAPIBridge
             ]
         );
 
-        if(200 === $response->getStatusCode()) {
+        if (200 === $response->getStatusCode()) {
             return $this->processResponse($response->toArray());
         }
-        
+
         return null;
     }
 
@@ -94,10 +94,10 @@ class NewsAPIBridge
             ]
         );
 
-        if(200 === $response->getStatusCode()) {
+        if (200 === $response->getStatusCode()) {
             return $this->processResponse($response->toArray());
         }
-        
+
         return null;
     }
 
@@ -119,10 +119,10 @@ class NewsAPIBridge
             ]
         );
 
-        if(200 === $response->getStatusCode()) {
+        if (200 === $response->getStatusCode()) {
             return $this->processResponse($response->toArray());
         }
-        
+
         return null;
     }
 
@@ -136,9 +136,9 @@ class NewsAPIBridge
 
     private function processResponse(array $content): ?array
     {
-        if('ok' === $content['status']) {
+        if ('ok' === $content['status']) {
             $articles = [];
-            foreach($content['articles'] as $newsApiArticle) {
+            foreach ($content['articles'] as $newsApiArticle) {
                 $article  = new Article();
                 $article->title = $newsApiArticle['title'];
                 $article->source = $newsApiArticle['source'];
@@ -148,74 +148,77 @@ class NewsAPIBridge
                 $article->urlToImage = $newsApiArticle['urlToImage'];
                 $article->content = $newsApiArticle['content'];
                 $article->publishedAt = new \DateTimeImmutable($newsApiArticle['publishedAt']);
-                
+
                 $articles[] = $article;
             }
             return $articles;
         }
 
-        if('error' === $content['status']) {
+        if ('error' === $content['status']) {
             throw new \Exception('unable to fetch data from newsAPI');
         }
     }
 
     private function checkEverythingRequest(EverythingRequest $request): void
     {
-        if(!empty($request->sortBy) && !in_array($request->sortBy, self::SORT_BY_OPTIONS)) {
+
+        if (empty($request->q = \urlencode($request->q))) {
+            throw new \Exception('you need a keyword!');
+        }
+        if (!empty($request->sortBy) && !in_array($request->sortBy, self::SORT_BY_OPTIONS)) {
             throw new \Exception('unsupported sortBy value');
         }
 
-        if(!empty($request->searchIn) && empty(array_intersect(explode(',', $request->searchIn), self::SEARCH_IN_OPTIONS))) {
+        if (!empty($request->searchIn) && empty(array_intersect(explode(',', $request->searchIn), self::SEARCH_IN_OPTIONS))) {
             throw new \Exception('unsupported searchIn values');
         }
 
-        if(empty($request->from) && !empty($request->to)) {
+        if (empty($request->from) && !empty($request->to)) {
             throw new \Exception('If "to" is filled, "from" should not be empty');
         }
 
-        if(!empty($request->from) && !empty($request->to) && $request->from > $request->to) {
+        if (!empty($request->from) && !empty($request->to) && $request->from > $request->to) {
             throw new \Exception('date from can not be great than date to');
         }
 
-        if(!empty($request->language) && !in_array($request->language, self::LANGUAGES_OPTIONS)) {
+        if (!empty($request->language) && !in_array($request->language, self::LANGUAGES_OPTIONS)) {
             throw new \Exception('unsupported language');
         }
-
-        if(!empty($request->pageSize) && 100 > $request->pageSize) {
+        if (!empty($request->pageSize) && 100 < $request->pageSize) {
             throw new \Exception('page Size too high');
         }
     }
 
     private function checkTopHeadlinesRequest(TopHeadLinesRequest $request): void
     {
-        if(!empty($request->source) && !empty($request->country)) {
+        if (!empty($request->source) && !empty($request->country)) {
             throw new \Exception('both "category" and "source" can not be filled at same time');
         }
 
-        if(!empty($request->category) && !in_array($request->category, self::CATEGORY_OPTIONS)) {
+        if (!empty($request->category) && !in_array($request->category, self::CATEGORY_OPTIONS)) {
             throw new \Exception('Unsupported category');
         }
 
-        if(!empty($request->country) && !in_array($request->country, self::COUNTRY_OPTIONS)) {
+        if (!empty($request->country) && !in_array($request->country, self::COUNTRY_OPTIONS)) {
             throw new \Exception('Unsupported country');
         }
 
-        if(!empty($request->pageSize) && 100 > $request->pageSize) {
+        if (!empty($request->pageSize) && 100 > $request->pageSize) {
             throw new \Exception('page Size too high');
         }
     }
 
     private function checkSourcesRequest(SourcesRequest $request): void
     {
-        if(!empty($request->category) && !in_array($request->category, self::CATEGORY_OPTIONS)) {
+        if (!empty($request->category) && !in_array($request->category, self::CATEGORY_OPTIONS)) {
             throw new \Exception('Unsupported category');
         }
 
-        if(!empty($request->country) && !in_array($request->country, self::COUNTRY_OPTIONS)) {
+        if (!empty($request->country) && !in_array($request->country, self::COUNTRY_OPTIONS)) {
             throw new \Exception('Unsupported country');
         }
 
-        if(!empty($request->language) && in_array($request->language, self::LANGUAGES_OPTIONS)) {
+        if (!empty($request->language) && in_array($request->language, self::LANGUAGES_OPTIONS)) {
             throw new \Exception('Unsupported language');
         }
     }
