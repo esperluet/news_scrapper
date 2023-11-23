@@ -11,12 +11,12 @@ class ManualEnricher implements NewsEnricherInterface
     /**
      * @var Article[] $articles
      * 
-     * @return Aritcle[]
+     * @return Article[]
      */
     public function enrich(array $articles): array
     {
         $enrichedArticles = [];
-        foreach($articles as $article) {
+        foreach ($articles as $article) {
             $enrichedArticles[] = $this->tag($article);
         }
         return $enrichedArticles;
@@ -26,5 +26,4 @@ class ManualEnricher implements NewsEnricherInterface
     {
         return $article->addTag($tag);
     }
-
 }

@@ -21,8 +21,7 @@ class PullNewsCommand extends Command
     public function __construct(
         private PullNews $puller,
         private LoggerInterface $logger
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -33,8 +32,7 @@ class PullNewsCommand extends Command
             ->setHelp('This command pull articles from external sources based on "keyword" and date internal("from", "to")')
             ->addArgument('keyword', InputArgument::REQUIRED, 'User password')
             ->addArgument('from', InputArgument::OPTIONAL, 'from date')
-            ->addArgument('to', InputArgument::OPTIONAL, 'to date')
-        ;
+            ->addArgument('to', InputArgument::OPTIONAL, 'to date');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -50,14 +48,14 @@ class PullNewsCommand extends Command
         $request->keyword = $input->getArgument('keyword');
 
         $from = $input->getArgument('from');
-        if(!empty($from)){
+        if (!empty($from)) {
             $request->from = new \DateTimeImmutable($from);
         } else {
-            $request->from = new \DateTimeImmutable('now');
+            $request->from = new \DateTimeImmutable('yesterday');
         }
 
         $to = $input->getArgument('to');
-        if(!empty($to)){
+        if (!empty($to)) {
             $request->to = new \DateTimeImmutable($to);
         }
 
@@ -66,7 +64,7 @@ class PullNewsCommand extends Command
             $output->writeln([
                 'Successfully pulled!',
             ]);
-            return Command::SUCCESS;    
+            return Command::SUCCESS;
         } catch (\Exception $e) {
             $output->writeln([
                 'Something went wrong!',
@@ -74,7 +72,5 @@ class PullNewsCommand extends Command
             $this->logger->error('Unable to pull news', ['exception' => $e, 'message' => $e->getMessage(), 'trace' => $e->getTrace()]);
             return Command::FAILURE;
         }
-        
     }
-
 }
